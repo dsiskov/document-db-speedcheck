@@ -1,9 +1,9 @@
 import { performance } from 'perf_hooks'
 
-async function start(fn: Promise<object>, callback: (res?: object) => void) {
-  console.log('\n')
+async function start(promise: Promise<any>, callback: (res?: any) => void) {
+  console.log('\n ------------------------')
   const startTime = performance.now()
-  const res = await fn
+  const res = await promise
   const endTime = performance.now()
 
   callback(res)
