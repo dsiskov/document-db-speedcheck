@@ -1,12 +1,12 @@
 @api=http://localhost:4000/api
 
-### prjs
-# @name prjs
+### 
+# @name get
 GET {{api}}/project-settings/1234
 Content-Type: application/json
 
-### project management data
-# @name InsertPmDataBulk
+### 
+# @name insertBulk
 POST {{api}}/project-settings/insertBulk
 Content-Type: application/json
 
@@ -14,4 +14,18 @@ Content-Type: application/json
   "idOffset": 0,
   "count": 1000000,
   "batchSize": 1000
+}
+
+### 
+# @name update
+PUT {{api}}/project-settings/1234
+Content-Type: application/json
+
+{
+  "settings": [
+    {
+      "key": "darkMode",
+      "value": "false",
+    }
+  ]
 }

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "nodemon src/index.ts",
     "bundle": "vite build",
     "k6:linear": "npm run bundle && export $(grep '^#' .env -v | xargs) && k6 run dist/app/tests/linear.test.js"
   },

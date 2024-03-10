@@ -2,7 +2,9 @@ import express, { Request, Response } from 'express'
 import {
   find as findPrjSettings,
   insertBulk,
+  update,
 } from './controller/projectSettings'
+import { ProjectSettings } from './model/project-settings'
 
 const router = express.Router()
 
@@ -25,5 +27,12 @@ router.post(
       .json({ message: `Bulk insert ${count} records performed successfully!` })
   }
 )
+
+router.put('/pm/:projectId', async (req: Request, res: Response) => {
+  await update(req.params.projectId, req.body as ProjectSettings)
+  return res.status(200).json({
+    message: `Document for project ${req.params.projectId} was updated successfully!`,
+  })
+})
 
 export default router
