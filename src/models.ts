@@ -1,5 +1,7 @@
 import { Connection } from 'mongoose'
-import prjSettingsSchema from './model/project-settings'
+import prjSettingsSchema, {
+  IProjectSettings,
+} from './app/model/project-settings'
 
 class Models {
   connection: Connection
@@ -9,7 +11,7 @@ class Models {
   }
 
   get projectSettings() {
-    return this.connection.model(
+    return this.connection.model<IProjectSettings>(
       'ProjectSettings',
       prjSettingsSchema,
       'ProjectSettings'

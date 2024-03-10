@@ -1,8 +1,8 @@
 import { Connection } from 'mongoose'
-import Models from '../models'
+import Models from '../../models'
 
 import measure from './stopwatch'
-import { prjSettingsData } from '../mocks/project-settings.mock'
+import { prjSettingsData } from '../../mocks/project-settings.mock'
 
 const mongoose = require('mongoose')
 

@@ -1,0 +1,6 @@
+@api=http://localhost:4000/api
+
+### prjs
+# @name prjs
+GET {{api}}/project-settings/1234
+Content-Type: application/json
