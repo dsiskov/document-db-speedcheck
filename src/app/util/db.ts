@@ -3,6 +3,7 @@ import Models from '../../models'
 
 import measure from './stopwatch'
 import { prjSettingsData } from '../../mocks/project-settings.mock'
+import config from '../util/config'
 
 const mongoose = require('mongoose')
 
@@ -19,10 +20,10 @@ class MyMongoClient {
   async openConnection(): Promise<void> {
     this.#connection = await mongoose
       .createConnection(`${this.myUri}/${this.myDbName}`, {
-        maxPoolSize: 10,
+        maxPoolSize: config.db.poolSize,
       })
       .asPromise()
-    console.log('Db connection is open!')
+    console.log(`Db connection (pool: ${config.db.poolSize}) is open!`)
   }
 
   get connection(): Connection {
@@ -50,7 +51,6 @@ async function measureCalls(connection: Connection) {
         return
       }
 
-      doc.newFlag = true
       await doc.save()
       resolve(doc)
     }),
@@ -74,5 +74,5 @@ async function measureCalls(connection: Connection) {
   )
 }
 
-export default new MyMongoClient('mongodb://localhost:27017', 'test')
+export default new MyMongoClient(config.db.uri, config.db.dbName)
 export { measureCalls }
