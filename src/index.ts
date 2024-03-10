@@ -4,6 +4,7 @@ import helmet from 'helmet'
 import router from './app/router'
 import dbClient from './app/util/db'
 import config from './app/util/config'
+import { logger } from './app/util/logger'
 
 async function setupDb() {
   await dbClient.openConnection()
@@ -20,5 +21,5 @@ app.use('/api', router)
 
 const PORT = config.server.port
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
+  logger.info(`Server is running on port ${PORT}`)
 })

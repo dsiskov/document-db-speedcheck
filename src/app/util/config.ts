@@ -6,6 +6,10 @@ interface IEnv {
   server: {
     port: number
   }
+  k6: {
+    virtualUsersCount: number
+    endpoint: string
+  }
 }
 interface IDbConfig {
   poolSize: number
@@ -21,6 +25,10 @@ const env: IEnv = Object.freeze({
   },
   server: {
     port: Number(process.env.PORT) || 3000,
+  },
+  k6: {
+    virtualUsersCount: Number(process.env.K6_VU_COUNT) || 1,
+    endpoint: process.env.K6_ENDPOINT || 'undefined',
   },
 })
 

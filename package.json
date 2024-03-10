@@ -5,19 +5,26 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bundle": "vite build",
+    "k6:linear": "npm run bundle && export $(grep '^#' .env -v | xargs) && k6 run dist/app/tests/linear.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.24.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/k6": "^0.50.0",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.11.24",
     "perf_hooks": "^0.0.1",
+    "rollup-plugin-copy": "^3.5.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite": "^5.2.7"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -1,8 +1,17 @@
 import { Schema } from 'mongoose'
 
+type ProjectSettingsItem = {
+  key: string
+  value: string
+}
+
+type ProjectSettings = {
+  settings: Array<ProjectSettingsItem>
+}
+
 interface IProjectSettings {
   prj_id: string
-  data: object
+  data: ProjectSettings
 }
 
 const prjSettingsSchema = new Schema<IProjectSettings>({
@@ -11,4 +20,4 @@ const prjSettingsSchema = new Schema<IProjectSettings>({
 })
 
 export default prjSettingsSchema
-export { IProjectSettings }
+export { IProjectSettings, ProjectSettings }

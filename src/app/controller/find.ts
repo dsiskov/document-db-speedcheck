@@ -8,11 +8,9 @@ async function find({
   projectId: string
 }): Promise<IProjectSettings> {
   const models = new Models(dbClient.connection)
-  const k = await models.projectSettings
-    .where({ project_id: projectId })
-    .findOne()
+  const k = await models.projectSettings.where({ prj_id: projectId }).findOne()
 
-  return <IProjectSettings>k
+  return k as IProjectSettings
 }
 
 export default find

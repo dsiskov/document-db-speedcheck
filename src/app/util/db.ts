@@ -4,6 +4,7 @@ import Models from '../../models'
 import measure from './stopwatch'
 import { prjSettingsData } from '../../mocks/project-settings.mock'
 import config from '../util/config'
+import { logger } from './logger'
 
 const mongoose = require('mongoose')
 
@@ -23,7 +24,7 @@ class MyMongoClient {
         maxPoolSize: config.db.poolSize,
       })
       .asPromise()
-    console.log(`Db connection (pool: ${config.db.poolSize}) is open!`)
+    logger.info(`Db connection (pool: ${config.db.poolSize}) is open!`)
   }
 
   get connection(): Connection {
@@ -37,7 +38,7 @@ async function measureCalls(connection: Connection) {
 
   await measure(
     models.projectSettings.where({ prj_id: '555' }).findOne(),
-    (res) => console.log('Find a document finished. Result: ', res)
+    (res) => logger.info('Find a document finished. Result: ', res)
   )
 
   await measure(
@@ -54,7 +55,7 @@ async function measureCalls(connection: Connection) {
       await doc.save()
       resolve(doc)
     }),
-    (res) => console.log('Update a document finished. Result: ', res)
+    (res) => logger.info('Update a document finished. Result: ', res)
   )
 
   await measure(
@@ -70,7 +71,7 @@ async function measureCalls(connection: Connection) {
         reject(err)
       }
     }),
-    (res) => console.log('Adding a new document finished. Result: ', res)
+    (res) => logger.info('Adding a new document finished. Result: ', res)
   )
 }
 
