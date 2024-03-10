@@ -2,7 +2,7 @@ const prjSettingsData = {
   settings: [
     {
       key: 'darkMode',
-      value: false,
+      value: 'false',
     },
     {
       key: 'background',

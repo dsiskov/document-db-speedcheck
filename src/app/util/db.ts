@@ -1,10 +1,11 @@
-import { Connection } from 'mongoose'
-import Models from '../../models'
+import { Connection, Model } from 'mongoose'
+import Models from '../model/models'
 
 import measure from './stopwatch'
 import { prjSettingsData } from '../../mocks/project-settings.mock'
 import config from '../util/config'
 import { logger } from './logger'
+import { IProjectSettings } from '../model/project-settings'
 
 const mongoose = require('mongoose')
 
@@ -75,5 +76,19 @@ async function measureCalls(connection: Connection) {
   )
 }
 
+async function insertBulk(
+  model: Model<IProjectSettings>,
+  documents: Array<IProjectSettings>,
+  batchSize: number = 1000
+): Promise<void> {
+  let sliceItems = []
+  let sliceIndex = 0
+  do {
+    sliceItems = documents.slice(sliceIndex, sliceIndex + batchSize)
+    await model.insertMany(sliceItems)
+    sliceIndex += batchSize
+  } while (sliceIndex < documents.length)
+}
+
 export default new MyMongoClient(config.db.uri, config.db.dbName)
-export { measureCalls }
+export { measureCalls, insertBulk }
